@@ -1,0 +1,125 @@
+<odoo>
+
+        <record id="ir_filters_view_tree" model="ir.ui.view">
+            <field name="model">hr.emp.award</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+         <record id="employee_award_view_tree" model="ir.ui.view">
+            <field name="model">hr.emp.award.form</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="award_name" />
+                    <field name="date"></field>
+                    <field name="award_type"></field>
+                    <field name="award_by"></field>
+                    <field name="win_amount"></field>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="employee_award_action" model="ir.actions.act_window">
+            <field name="name">Award Type</field>
+            <field name="res_model">hr.emp.award</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create Award Type </p>
+            </field>
+        </record>
+
+        <record id="employee_award_hr_form" model="ir.ui.view">
+            <field name="name">employee.award.view.form</field>
+            <field name="model">hr.emp.award.form</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <button name="%(action_emp_award_form_report)d" string="Print PDF" type="action" class="oe_highlight"/>
+                    <sheet>
+                    <group>
+
+                        <h1 class="d-flex">
+                            <field name="award_name" placeholder="Award Name" required="1"/>
+                        </h1>
+
+                        <group>
+                            <field name="employee_name"></field>
+                            <field name="award_by"></field>
+                            <field name="award_type"></field>
+
+                        </group>
+                        <group>
+
+                            <field name="date"></field>
+                            <field name="win_amount"></field>
+
+                        </group>
+                        <notebook>
+                            <page string="Award Detail">
+                                 <field name="award_detail" type="html" />
+                            </page>
+                        </notebook>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_award_hr_action" model="ir.actions.act_window">
+            <field name="name">Employee Award</field>
+            <field name="res_model">hr.emp.award.form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create Employee Award </p>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="hr_employee_inherit_form_view">
+            <field name="name">hr.employee.inherit_form.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@name='personal_information']" position="after">
+                    <page name="award" string="Award">
+                          <field name="emp_id" widget="section_and_note_one2many" >
+                                <tree editable="bottom">
+                                    <field name="award_name"/>
+                                    <field name="award_by"/>
+                                    <field name="award_type"/>
+                                    <field name="date"/>
+                                    <field name="win_amount"/>
+                                </tree>
+                            </field>
+
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <menuitem
+            id="employee_award_menu"
+            name="Award Type"
+            parent="hr.menu_human_resources_configuration"
+            action="employee_award_action"
+            sequence="60"/>
+
+        <menuitem
+            id="employee_award_hr_menu"
+            name="Employee Award"
+            parent="hr.menu_hr_root"
+            groups="hr.group_hr_manager"
+            action="employee_award_hr_action"
+            sequence="10"/>
+
+
+</odoo>

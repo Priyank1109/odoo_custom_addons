@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="report.paperformat" id="paperformat_project_report">
+        <field name="name">paperformat.project.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <template id="report_emp_award_form">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout" t-lang="en_US" t-foreach="docs" t-as="o">
+        <div class="page">
+            <div class="oe_structure"/>
+            <br/><br/>
+            <div style="color:#66b3ff; width: 100%"><strong><h2 class="text-center"> <span t-field="o.award_name"/></h2></strong>
+            </div>
+                <div>
+                    <p style="margin-left:650px; margin-top: 40px;"><span t-field="o.date"/></p>
+                </div>
+
+            <div class="row mt32 mb32" style="margin-top: 40px;">
+                <div class="col-auto mw-500 mb-3" style = "width : 25%">
+                    <strong>Employee   :</strong>
+                    <p class="m-0" t-field="o.employee_name"/>
+                </div>
+                <div  class="col-auto mw-100 mb-3"  style = "width : 25%">
+                    <strong>Given By   :</strong>
+                    <p class="m-0" t-field="o.award_by"/>
+                </div>
+            </div>
+            <div class="row mt32 mb32">
+                <div class="col-auto mw-500 mb-3" style = "width : 25%">
+                    <strong>Award Type   :</strong>
+                    <p class="m-0" t-field="o.award_type"/>
+                </div>
+                <div  class="col-auto mw-100 mb-3"  style = "width : 25%">
+                    <strong>Winning Amount   :</strong>
+                    <p class="m-0" t-field="o.win_amount"/>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row mt32 mb32">
+                <div  class="col-auto mw-100 mb-3"  style = "width : 25%">
+                    <strong>Award Description</strong>
+                    <p class="m-0" t-field="o.award_detail"/>
+                </div>
+            </div>
+            <div class= "row">
+        </div>
+        </div>
+
+    </t>
+</t>
+</template>
+
+</odoo>
