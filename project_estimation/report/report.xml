@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+   <report id="report_export_file_xls"
+           string="Export excel report"
+           model="estimation.info"
+           report_type="xlsx"
+           name="project_estimation.report_export_xls"
+           file="project_estimation.report_export_xls"
+           />
+   
+  
+   <report id="sample_report_export_file_xls"
+           string="Sample Export excel report"
+           model="estimation.info"
+           report_type="xlsx"
+           name="project_estimation.sample_report_xls"
+           file="project_estimation.sample_report_xls"
+           />
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+     <record id="action_estimation_management" model="ir.actions.act_window">
+        <field name="name">Estimation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">estimation.info</field>
+        <field name="view_mode">tree,kanban,form,graph</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create Estimation</p>
+        </field>
+    </record>
+
+    <menuitem
+        id="id_estimation"
+        name="Estimation"
+        web_icon="project_estimation,static/description/icon.png"
+        action="action_estimation_management"
+        sequence="0"
+        groups="project.group_project_user"/>
+
+
+    <menuitem
+        id="estimation_configuration_menu"
+        name="Configuration"
+        sequence="10"
+        groups="project.group_project_manager"
+        parent="id_estimation"/>
+
+    <menuitem id="id_technology_configuration"
+        name="Technology"
+        sequence="0"
+        parent="estimation_configuration_menu" />
+
+    <menuitem id="id_project_configuration"
+        name="Project Tags"
+        sequence="0"
+        parent="estimation_configuration_menu"/>
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.estimation.info,access_estimation_info,project_estimation.model_estimation_info,project.group_project_user,1,1,1,1
+access.project.tag,access_project_tag,project_estimation.model_project_tag,base.group_user,1,1,1,1
+access.technology.info,access_technology_info,project_estimation.model_technology_info,base.group_user,1,1,1,1
+access.employee.name,access_employee_name,project_estimation.model_employee_name,base.group_user,1,1,1,1
+access.project.details,access_project_details,project_estimation.model_project_details,base.group_user,1,1,1,1
+access.add.task,access_add_task,project_estimation.model_add_task,base.group_user,1,1,1,1
+access.project.category,access_project_category,project_estimation.model_project_category,base.group_user,1,1,1,1
+access.import.file,access_import_file,project_estimation.model_import_file,base.group_user,1,1,1,1

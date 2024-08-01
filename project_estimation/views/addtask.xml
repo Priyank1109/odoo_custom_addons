@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="add_task_tree" model="ir.ui.view">
+        <field name="name">add.task.tree</field>
+        <field name="model">add.task</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="technology_id" optional="show" />
+                <!-- <field name="tag_ids" optional="show"/> -->
+                <field name="category_id"/>
+                <field name="module_name" optional="show"/>
+                <field name="hours" optional="show" widget="float_time"/>
+                <field name="task_notes" optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="add_task_form" model="ir.ui.view">
+        <field name="name">add.task.form</field>
+        <field name="model">add.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="technology_id" />
+                            <!-- <field name="tag_ids"/> -->
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="module_name"/>
+                            <field name="hours" widget="float_time"/>
+                            <field name="task_notes"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="add_task_action" model="ir.actions.act_window">
+        <field name="name">Add Task</field>
+        <field name="res_model">add.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create Task Technology Wise</p>
+        </field>
+    </record>
+
+    <!-- <menuitem id="id_add_task" name="Add Task" sequence="30" parent="id_technology_configuration" action="add_task_action"/> -->
+</odoo>
+
+     
+     
+    

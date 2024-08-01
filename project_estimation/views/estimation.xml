@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="estimation_management_tree" model="ir.ui.view">
+        <field name="name">estimation.info.tree</field>
+        <field name="model">estimation.info</field>
+        <field name="arch" type="xml">
+            <tree export_xlsx="1" limit="10">
+                <field name="id" string="Estimation id"/>
+                <field name="title" />
+                <field name="technology_id" widget="many2many_tags" optional="show"/>
+                <field name="tag_ids"  widget="many2many_tags" optional="show"/>
+                <field name="write_date" optional="show"/>
+                <field name="employee_id" optional="show"/>
+                <field name="project_manager" optional="show"/>
+                <field name="category"  optional="show"/>
+                <field name="description"  optional="0"/>
+                <field name="estimation_type" optional="show"/>
+                <field name="created_at" optional="show"/>
+                <field name="created_by" optional="show"/>
+                <field name="write_uid" optional="show"/>
+                <field name="total_hours" widget="float_time" optional="show"/>
+                <!-- <field name="estimation_file" invisible="1"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="estimation_management_form" model="ir.ui.view">
+        <field name="name">estimation.info.form</field>
+        <field name="model">estimation.info</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                   <button string="Export Data" class="oe_highlight fa fa-solid fa-download" type="object" name="export_button"/>
+                   <button name="%(project_estimation.action_import_file)d" type="action" class="oe_highlight fa fa-solid fa-download" string="Import Estimation File"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="title"/>
+                            <field name="category" />
+                            <field name="description" />
+                            <field name="technology_id" widget="many2many_tags"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="category_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="estimation_type" widget="radio"/>
+                            <field name="employee_id" />
+                            <field name="created_at" invisible="1" />
+                            <field name="created_by" invisible="1"/>
+                            <field name="write_date" invisible="1" />
+                            <field name="write_uid"  invisible="1" />
+                            <field name="project_manager"/>
+                            <field name="review_by" />
+                            <field name="xls_file" invisible="1" />
+                           
+                            <!-- <field name="Last_submitted_date" /> -->
+                             <!-- invisible="1" -->
+                             <!-- <button string="Import Data" class="oe_highlight fa fa-solid fa-download" type="object" name="import_xls" /> -->
+                        </group>
+                        <group>
+                            <field name="estimation_file"  filename="file_name" widget="many2many_binary"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Add Task Details">
+                            <field name="project_detail_ids" widget="section_and_note_one2many" mode="tree,kanban" export_xlsx="1" > 
+                                <tree editable="bottom">
+                                    <!-- <field name="sequence" widget="handle"/> -->
+                                    <field name="technology_id"/>
+                                    <field name="category_id"/>
+                                    <field name="module_name" />
+                                    <!-- <field name="task_id" domain="[('technology_id', '=',technology_id),('category_id','=',category_id)]" options="{'no_quick_create':True}"/> -->
+                                    <field name="name" widget="sample_section_and_note_text"/>
+                                    <field name="hours" widget="float_time"/>
+                                    <field name="display_type" invisible="1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="technology_id"/>
+                                        <field name="category_id"/>
+                                        <field name="task_id"/>
+                                        <field name="hours"/>
+                                        <field name="name"/>
+                                        <field name="display_type"/>
+                                    </group>
+                                    <label for="name" string="Section Name (eg. Products, Services)" attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
+                                    <label for="name" string="Note" attrs="{'invisible': [('display_type', '!=', 'line_note')]}"/>
+                                    <field name="name" nolabel="1"  attrs="{'invisible': [('display_type', '=', False)]}"/>
+                                </form>
+                            </field>
+                            <form>
+                                <group class="oe_subtotal_footer oe_right oe_dark" name="Total Hours">
+                                    <field name="total_hours" widget="float_time"/>
+                                </group>
+                                <group>
+                                    <field name="notes" />
+                                </group>
+                            </form>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="estimation_management_search" model="ir.ui.view">
+        <field name="name">estimation.info.search</field>
+        <field name="model">estimation.info</field>
+        <field name="arch" type="xml">
+            <search>
+              <field name="id"/>
+              <field name="category"/>
+              <field name="description"/>
+              <field name="estimation_type"/>
+              <field name="created_at"/>
+              <field name="created_by"/>
+              <field name="updated_at"/>
+              <field name="updated_by"/>
+              <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+              <separator/>
+              <filter name="filter_unarchived" string="Unarchived" domain="[('active', '=', True)]"/>
+              <filter name="group_estimation_type" string="Estimation type" context="{'group_by':'estimation_type'}"/>
+              <filter name="group_category" string="Category" context="{'group_by':'category'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="estimation_info_view_graph" model="ir.ui.view">
+        <field name="name">estimation.info.graph</field>
+        <field name="model">estimation.info</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="employee_id"/>
+                <field name="technology_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="estimation_view_kanban" model="ir.ui.view">
+        <field name="name">estimation.info.kanban</field>
+        <field name="model">estimation.info</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="title" />
+                <field name="technology_id" />
+                <field name="tag_ids" />
+                <field name="employee_id" />
+                <field name="project_manager" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div>
+                                <strong>
+                                    <field name="title" />
+                                </strong>
+                                <ul>
+                                    <li>Project :  <field name="title"/></li>
+                                    <li>Technology Name : <field name="technology_id"/></li>
+                                    <li>Project Tag : <field name="tag_ids"/> </li>
+                                    <li>Assign To : <field name="employee_id"/> </li>
+                                    <li>Assign By : <field name="project_manager"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,19 @@
+
+<odoo>
+
+    <!-- Define a new module category for organizing the Event Manager group -->
+        <record model="ir.module.category" id="event_manager_group">
+            <field name="name">Event Mnager</field>
+            <field name="description">Helps you manage access write.</field>
+             <field name="sequence">11</field>
+        </record>
+
+    <!-- Define a new user group called 'Event Manager' -->
+        <record id="group_event_manager" model="res.groups">
+            <field name="name">Event Manager</field>
+            <field name="category_id" ref="event_manager_group"/>
+        </record>
+
+    
+
+</odoo>

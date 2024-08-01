@@ -1,0 +1,58 @@
+<odoo>
+    <!-- Tree view for event records -->
+    <record id="view_event_tree" model="ir.ui.view">
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Display these fields in the tree view -->
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form view for creating and editing event records -->
+    <record id="view_event_form" model="ir.ui.view">
+        <field name="name">events.events.form</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- Buttons to change the state of the event -->
+                    <!-- "Confirm" button, visible only when state is not 'confirmed' -->
+                    <button name="action_confirm" type="object" string="Confirm" invisible="state == 'confirmed'"/>
+                    <!-- "Draft" button, visible only when state is not 'draft' -->
+                    <button name="action_draft" type="object" string="Draft" invisible="state == 'draft'" />
+                    <!-- "Done" button, visible only when state is not 'done' -->
+                    <button name="action_done" type="object" string="Done" invisible="state == 'done'"/>
+                    <!-- Status bar to visually represent the state of the event -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <!-- Form fields to capture event details -->
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="location"/>
+                        <field name="seats"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open the list of events in tree and form view -->
+    <record id="action_event" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="res_model">event.event</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu items to navigate to the events -->
+    <menuitem id="menu_event_root" name="Events" sequence="21" />
+    <menuitem id="menu_event" name="Events" parent="menu_event_root" action="action_event" sequence="4"/>
+</odoo>
