@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="action_report_product_template" model="ir.actions.report">
+       <field name="name">Product Report</field>
+       <field name="model">products</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">test_module.report_product</field>
+       <field name="report_file">test_module.report_product</field>
+       <field name="print_report_name">'Product Report - %s' % (object.product_name)</field>
+       <field name="binding_model_id" ref="test_module.model_products"/>
+       <field name="binding_type">report</field>
+   </record>
+
+
+   <record id="action_report_categorys" model="ir.actions.report">
+       <field name="name">Category Report</field>
+       <field name="model">product.categorys</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">test_module.report_categorys</field>
+       <field name="report_file">test_module.report_categorys</field>
+       <field name="print_report_name">'Category Report - %s' % (object.catgory_name)</field>
+       <field name="binding_model_id" ref="test_module.model_product_categorys"/>
+       <field name="binding_type">report</field>
+   </record>
+</odoo>

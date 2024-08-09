@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_categorys_list" model="ir.ui.view">
+        <field name="model">product.categorys</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="catgory_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="product_categorys_form" model="ir.ui.view">
+        <field name="model">product.categorys</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="catgory_name"/>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="product_line">
+                            <tree>
+                                <field name="category_id"/>
+                                <field name="product_name"/>
+                            </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+                    
+
+    <record id="products_list" model="ir.ui.view">
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="category_id"/>
+                <field name="product_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="products_form" model="ir.ui.view">
+        <field name="model">products</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="product_name"/>
+                            <field name="buy_price"/>
+                            <field name="sell_price"/>
+                            <field name="profit"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_categorys" model="ir.actions.act_window">
+        <field name="name">Category</field>
+        <field name="res_model">product.categorys</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_products" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">products</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_product_categorys" id="menu_category_action"/>
+    <menuitem action="action_products" id="menu_action_products"/>
+
+
+    <!-- xpath -->
+    <record model="ir.ui.view" id="sale_order_form_inherit">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+                <field name="test_field"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="products_report_tree" model="ir.ui.view">
+        <field name="model">product.report</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_products_report" model="ir.actions.act_window">
+        <field name="name">Products report</field>
+        <field name="res_model">product.report</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+     <menuitem action="action_products_report" parent="menu_action_products" id="menu_action_products_report"/>
+
+</odoo>
+
